@@ -76,7 +76,7 @@ if UPGRADE_PACKAGES.lower() == "true":
 
 UPSTREAM_REPO = environ.get("UPSTREAM_REPO", "")
 if "WZMLakane" in UPSTREAM_REPO or len(UPSTREAM_REPO) == 0:
-    UPSTREAM_REPO = "https://github.com/aquib4040/AZML"
+    UPSTREAM_REPO = "https://github.com/shinubo28always/AZML"
     UPSTREAM_BRANCH = "main"
 else:
     UPSTREAM_BRANCH = environ.get("UPSTREAM_BRANCH", "main")
