@@ -2,14 +2,16 @@
 class WZMLStyle:
     # ----------------------
     # async def start(client, message) ---> __main__.py
-    ST_BN1_NAME = "👑 ᴏᴡɴᴇʀ"
-    ST_BN1_URL = "https://t.me/Issei_Senpai_01"
-    ST_BN2_NAME = "📢 ᴜᴘᴅᴀᴛᴇs"
-    ST_BN2_URL = "https://t.me/Canon_Bots"
-    ST_MSG = """<i>This bot can mirror all your links|files|torrents to Google Drive or any rclone cloud or to telegram or to ddl servers.</i>
-<b>Type {help_command} to get a list of available commands</b>"""
-    ST_BOTPM = """<i>Now, This bot will send all your files and links here. Start Using ...</i>"""
-    ST_UNAUTH = """<i>You Are not authorized user! Deploy your own WZML-X Mirror-Leech bot</i>"""
+    ST_BN1_NAME = "📢 ᴜᴘᴅᴀᴛᴇs"
+    ST_BN1_URL = "https://t.me/ST_Rename_Update"
+    ST_BN2_NAME = "💬 sᴜᴘᴘᴏʀᴛ"
+    ST_BN2_URL = "https://t.me/Unrated_Coder"
+    ST_BN3_NAME = "🛠️ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ"
+    ST_BN3_URL = "https://github.com/aquib4040/AZML.git"
+    ST_MSG = """𝑇ℎ𝑖𝑠 𝑏𝑜𝑡 𝑐𝑎𝑛 𝑚𝑖𝑟𝑟𝑜𝑟 𝑎𝑙𝑙 𝑦𝑜𝑢𝑟 𝑙𝑖𝑛𝑘𝑠/𝑓𝑖𝑙𝑒𝑠/𝑡𝑜𝑟𝑟𝑒𝑛𝑡𝑠 𝑡𝑜 𝐺𝑜𝑜𝑔𝑙𝑒 𝐷𝑟𝑖𝑣𝑒 𝑜𝑟 𝑎𝑛𝑦 𝑟𝑐𝑙𝑜𝑛𝑒 𝑐𝑙𝑜𝑢𝑑 𝑜𝑟 𝑡𝑜 𝑡𝑒𝑙𝑒𝑔𝑟𝑎𝑚 𝑜𝑟 𝑡𝑜 𝑑𝑑𝑙 𝑠𝑒𝑟𝑣𝑒𝑟𝑠.
+<blockquote><b>𝑇𝑦𝑝𝑒 {help_command} 𝑡𝑜 𝑔𝑒𝑡 𝑎 𝑙𝑖𝑠𝑡 𝑜𝑓 𝑎𝑣𝑎𝑖𝑙𝑎𝑏𝑙𝑒 𝑐𝑜𝑚𝑚𝑎𝑛𝑑𝑠.</b></blockquote>"""
+    ST_BOTPM = """𝑁𝑜𝑤, 𝑇ℎ𝑖𝑠 𝑏𝑜𝑡 𝑤𝑖𝑙𝑙 𝑠𝑒𝑛𝑑 𝑎𝑙𝑙 𝑦𝑜𝑢𝑟 𝑓𝑖𝑙𝑒𝑠 𝑎𝑛𝑑 𝑙𝑖𝑛𝑘𝑠 ℎ𝑒𝑟𝑒. 𝑆𝑡𝑎𝑟𝑡 𝑈𝑠𝑖𝑛𝑔 ..."""
+    ST_UNAUTH = """𝑌𝑜𝑢 𝐴𝑟𝑒 𝑛𝑜𝑡 𝑎𝑢𝑡ℎ𝑜𝑟𝑖𝑧𝑒𝑑 𝑢𝑠𝑒𝑟! 𝐷𝑒𝑝𝑙𝑜𝑦 𝑦𝑜𝑢𝑟 𝑜𝑤𝑛 𝑀𝑖𝑟𝑟𝑜𝑟-𝐿𝑒𝑒𝑐ℎ 𝑏𝑜𝑡."""
     OWN_TOKEN_GENERATE = (
         """<b>Temporary Token is not yours!</b>\n\n<i>Kindly generate your own.</i>"""
     )
