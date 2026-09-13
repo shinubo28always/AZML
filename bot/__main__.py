@@ -105,6 +105,13 @@ async def start(client, message):
     buttons.ubutton(BotTheme("ST_BN1_NAME"), BotTheme("ST_BN1_URL"))
     buttons.ubutton(BotTheme("ST_BN2_NAME"), BotTheme("ST_BN2_URL"))
     reply_markup = buttons.build_menu(2)
+
+    unauth_buttons = ButtonMaker()
+    unauth_buttons.ubutton(BotTheme("ST_BN1_NAME"), BotTheme("ST_BN1_URL"))
+    unauth_buttons.ubutton(BotTheme("ST_BN2_NAME"), BotTheme("ST_BN2_URL"))
+    unauth_buttons.ubutton(BotTheme("ST_BN3_NAME"), BotTheme("ST_BN3_URL"))
+    unauth_reply_markup = unauth_buttons.build_menu(2)
+
     if len(message.command) > 1 and message.command[1] == "wzmlx":
         await deleteMessage(message)
     elif len(message.command) > 1 and config_dict["TOKEN_TIMEOUT"]:
@@ -135,7 +142,7 @@ async def start(client, message):
     elif config_dict["BOT_PM"]:
         await sendMessage(message, BotTheme("ST_BOTPM"), reply_markup, photo="IMAGES")
     else:
-        await sendMessage(message, BotTheme("ST_UNAUTH"), reply_markup, photo="IMAGES")
+        await sendMessage(message, BotTheme("ST_UNAUTH"), unauth_reply_markup, photo="IMAGES")
     await DbManger().update_pm_users(message.from_user.id)
 
 
