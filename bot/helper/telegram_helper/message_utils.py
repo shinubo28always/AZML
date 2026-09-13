@@ -54,6 +54,17 @@ from bot.helper.telegram_helper.button_build import ButtonMaker, to_bot_api_keyb
 from bot.helper.ext_utils.exceptions import TgLinkException
 
 _http_session = None
+_image_index = 0
+
+
+def get_next_image():
+    global _image_index
+    images_list = config_dict.get("IMAGES", [])
+    if not images_list:
+        return None
+    photo = images_list[_image_index % len(images_list)]
+    _image_index = (_image_index + 1) % len(images_list)
+    return photo
 
 
 async def get_http_session():
@@ -81,8 +92,7 @@ async def send_styled_http_message(chat_id, text, keyboard_dict, photo=None, rep
     if photo:
         if photo == "IMAGES":
             try:
-                images_list = config_dict.get("IMAGES", [])
-                photo = rchoice(images_list) if images_list else None
+                photo = get_next_image()
             except Exception:
                 photo = None
         if photo:
@@ -208,7 +218,7 @@ async def sendMessage(message, text, buttons=None, photo=None, **kwargs):
         if photo:
             try:
                 if photo == "IMAGES":
-                    photo = rchoice(config_dict["IMAGES"])
+                    photo = get_next_image()
                 return await message.reply_photo(
                     photo=photo,
                     reply_to_message_id=message.id,
@@ -263,7 +273,7 @@ async def sendCustomMsg(chat_id, text, buttons=None, photo=None, debug=False):
         if photo:
             try:
                 if photo == "IMAGES":
-                    photo = rchoice(config_dict["IMAGES"])
+                    photo = get_next_image()
                 return await bot.send_photo(
                     chat_id=chat_id,
                     photo=photo,
@@ -323,7 +333,7 @@ async def sendMultiMessage(chat_ids, text, buttons=None, photo=None):
             if photo:
                 try:
                     if photo == "IMAGES":
-                        photo = rchoice(config_dict["IMAGES"])
+                        photo = get_next_image()
                     sent = await bot.send_photo(
                         chat_id=chat.id,
                         photo=photo,
@@ -377,7 +387,7 @@ async def editMessage(message, text, buttons=None, photo=None):
                 return http_msg
         if message.media:
             if photo:
-                photo = rchoice(config_dict["IMAGES"]) if photo == "IMAGES" else photo
+                photo = get_next_image() if photo == "IMAGES" else photo
                 return await message.edit_media(
                     InputMediaPhoto(photo, text), reply_markup=buttons
                 )
