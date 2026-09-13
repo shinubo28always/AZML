@@ -31,8 +31,8 @@ services:
   # Main APP (Your Leech Bot)
   # ==========================
   app:
-    container_name: azml
-    image: azml
+    container_name: azml2
+    image: azml2
     build: .
     command: bash start.sh
     restart: unless-stopped
@@ -41,7 +41,7 @@ services:
     #network_mode: "service:gluetun"
 
     ports:
-      - "11687:85"
+      - "11677:85"
 
     environment:
       - DOWNLOAD_DIR=/usr/src/app/downloads/
