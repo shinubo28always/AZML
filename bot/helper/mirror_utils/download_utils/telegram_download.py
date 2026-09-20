@@ -136,15 +136,15 @@ class TelegramDownloadHelper:
         elif not self.__is_cancelled:
             await self.__onDownloadError("Internal Error occurred")
 
-    async def _try_thunder_api(self, message, path, name, listener):
-        """Try to get DDL via Thunder API, download via aria2c. Returns True if successful."""
-        thunder_api = config_dict.get("THUNDER_API", "")
-        if not thunder_api:
+    async def _try_ddl_api(self, message, path, name, listener):
+        """Try to get DDL via DDL API, download via aria2c. Returns True if successful."""
+        ddl_api = config_dict.get("DDL_API", "") or config_dict.get("THUNDER_API", "")
+        if not ddl_api:
             return False
 
         channel_id = message.chat.id
         message_id = message.id
-        api_url = f"{thunder_api.rstrip('/')}/api/generate_link"
+        api_url = f"{ddl_api.rstrip('/')}/api/generate_link"
 
         try:
             async with ClientSession() as session:
@@ -157,24 +157,26 @@ class TelegramDownloadHelper:
                         data = await resp.json()
                         if data.get("success") and data.get("download_link"):
                             ddl = data["download_link"]
-                            LOGGER.info(f"Thunder API DDL obtained: {ddl}")
+                            LOGGER.info(f"DDL API link obtained: {ddl}")
                             await add_aria2c_download(
                                 ddl, path, listener, name, "", None, None
                             )
                             return True
                         else:
-                            LOGGER.warning(f"Thunder API returned unsuccessful response: {data}")
+                            LOGGER.warning(f"DDL API returned unsuccessful response: {data}")
                     else:
-                        LOGGER.warning(f"Thunder API returned status {resp.status}")
+                        LOGGER.warning(f"DDL API returned status {resp.status}")
         except asyncio.TimeoutError:
-            LOGGER.warning("Thunder API timed out after 45s, falling back to Pyrogram download")
+            LOGGER.warning("DDL API timed out after 45s, falling back to Pyrogram download")
         except (ClientError, ConnectionError, OSError) as e:
-            LOGGER.warning(f"Thunder API unreachable: {e}, falling back to Pyrogram download")
+            LOGGER.warning(f"DDL API unreachable: {e}, falling back to Pyrogram download")
         except Exception as e:
-            LOGGER.error(f"Thunder API handler error (non-network): {e}")
+            LOGGER.error(f"DDL API handler error (non-network): {e}")
             raise
 
         return False
+
+    _try_thunder_api = _try_ddl_api
 
     async def add_download(self, message, path, filename, session, decrypter):
         if session == "user":
@@ -234,10 +236,11 @@ class TelegramDownloadHelper:
                     from_queue = True
                 else:
                     from_queue = False
-                # Try Thunder API first for faster download via aria2c
-                if await self._try_thunder_api(message, f"{path}/", name, self.__listener):
-                    LOGGER.info(f"Using Thunder API + aria2c for: {name}")
+                # Try DDL API first for faster download via aria2c
+                if await self._try_ddl_api(message, f"{path}/", name, self.__listener):
+                    LOGGER.info(f"Using DDL API + aria2c for: {name}")
                     return
+
                 # Fallback: use original Pyrogram download
                 await self.__onDownloadStart(name, size, gid, from_queue)
                 LOGGER.info(f"Using Pyrogram download for: {name}")

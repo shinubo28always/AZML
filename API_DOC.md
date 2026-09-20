@@ -1,12 +1,12 @@
-# Thunder API Documentation
+# DDL API Documentation
 
-**Base URL:** `https://animeshrinexyz-92535430c5ef.herokuapp.com/api/`
+**Config Variable:** `DDL_API` (or legacy `THUNDER_API`)
 
 ---
 
 ## API Endpoint
 
-Thunder exposes an API to programmatically generate download links for files in any Telegram channel the bot has access to.
+FileToLink exposes an API to programmatically generate direct download and stream links for files in any Telegram channel the bot has access to.
 
 ### `POST /api/generate_link`
 
