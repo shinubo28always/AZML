@@ -572,9 +572,10 @@ async def load_config():
     if len(FILELION_API) == 0:
         FILELION_API = ""
 
-    THUNDER_API = environ.get("THUNDER_API", "")
-    if len(THUNDER_API) == 0:
-        THUNDER_API = ""
+    DDL_API = environ.get("DDL_API", environ.get("THUNDER_API", ""))
+    if len(DDL_API) == 0:
+        DDL_API = ""
+    THUNDER_API = DDL_API
 
     DEF_IMDB_TEMP = environ.get("IMDB_TEMPLATE", "")
     if len(DEF_IMDB_TEMP) == 0:
@@ -806,6 +807,7 @@ async def load_config():
             "USE_SERVICE_ACCOUNTS": USE_SERVICE_ACCOUNTS,
             "WEB_PINCODE": WEB_PINCODE,
             "YT_DLP_OPTIONS": YT_DLP_OPTIONS,
+            "DDL_API": DDL_API,
             "THUNDER_API": THUNDER_API,
             "TMDB_ACCESS_TOKEN": TMDB_ACCESS_TOKEN,
             "AUTO_THUMBNAIL": AUTO_THUMBNAIL,

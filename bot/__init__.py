@@ -300,9 +300,10 @@ DEBRID_LINK_API = environ.get("DEBRID_LINK_API", "")
 if len(DEBRID_LINK_API) == 0:
     DEBRID_LINK_API = ""
 
-THUNDER_API = environ.get("THUNDER_API", "")
-if len(THUNDER_API) == 0:
-    THUNDER_API = ""
+DDL_API = environ.get("DDL_API", environ.get("THUNDER_API", ""))
+if len(DDL_API) == 0:
+    DDL_API = ""
+THUNDER_API = DDL_API
 
 INDEX_URL = environ.get("INDEX_URL", "").rstrip("/")
 if len(INDEX_URL) == 0:
@@ -798,6 +799,7 @@ config_dict = {
     "USE_SERVICE_ACCOUNTS": USE_SERVICE_ACCOUNTS,
     "WEB_PINCODE": WEB_PINCODE,
     "YT_DLP_OPTIONS": YT_DLP_OPTIONS,
+    "DDL_API": DDL_API,
     "THUNDER_API": THUNDER_API,
     "TMDB_ACCESS_TOKEN": TMDB_ACCESS_TOKEN,
     "AUTO_THUMBNAIL": AUTO_THUMBNAIL,
