@@ -203,6 +203,8 @@ async def edit_styled_http_reply_markup(chat_id, message_id, keyboard_dict):
 
 async def sendMessage(message, text, buttons=None, photo=None, **kwargs):
     try:
+        if photo == "IMAGES":
+            photo = get_next_image()
         if kb_dict := to_bot_api_keyboard(buttons):
             chat_id = message.chat.id
             reply_to_id = (
@@ -217,8 +219,6 @@ async def sendMessage(message, text, buttons=None, photo=None, **kwargs):
                 return http_msg
         if photo:
             try:
-                if photo == "IMAGES":
-                    photo = get_next_image()
                 return await message.reply_photo(
                     photo=photo,
                     reply_to_message_id=message.id,
